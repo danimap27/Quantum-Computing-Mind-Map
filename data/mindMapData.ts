@@ -2,7 +2,7 @@ import type { MindMapNodeData } from '../types';
 
 export const mindMapData: MindMapNodeData = {
   id: 'root',
-  name: 'Quantum Computing: Foundations to Applications',
+  name: 'Quantum Computing',
   details: 'An interactive guide to the world of quantum computing, from fundamental principles to cutting-edge applications. Subtitle: Unlocking the Imagination of Nature.',
   children: [
     {
