@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import type { SimulationNode } from '../types';
 
 interface NodeDetailModalProps {
@@ -8,6 +9,8 @@ interface NodeDetailModalProps {
 }
 
 const NodeDetailModal: React.FC<NodeDetailModalProps> = ({ node, onClose }) => {
+  const { t } = useTranslation();
+
   return (
     <div 
       className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 transition-opacity"
@@ -26,8 +29,8 @@ const NodeDetailModal: React.FC<NodeDetailModalProps> = ({ node, onClose }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <h2 className="text-2xl font-bold font-orbitron text-cyan-400 mb-4">{node.name}</h2>
-        <p className="text-gray-300 whitespace-pre-wrap">{node.details}</p>
+        <h2 className="text-2xl font-bold font-orbitron text-cyan-400 mb-4">{t(node.id)}</h2>
+        <p className="text-gray-300 whitespace-pre-wrap">{t(`${node.id}-details`)}</p>
         {node.externalLink && (
           <div className="mt-6">
             <a 
@@ -36,7 +39,7 @@ const NodeDetailModal: React.FC<NodeDetailModalProps> = ({ node, onClose }) => {
               rel="noopener noreferrer"
               className="inline-flex items-center text-sm font-semibold text-purple-400 hover:text-purple-300 transition"
             >
-              Learn More
+              {t('learn-more')}
               <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
