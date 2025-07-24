@@ -1,12 +1,15 @@
 
 import React, { useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { mindMapData } from './data/mindMapData';
 import MindMap from './components/MindMap';
 import NodeDetailModal from './components/NodeDetailModal';
 import { SearchIcon, BrandIcon } from './components/Icons';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import type { SimulationNode } from './types';
 
 const App: React.FC = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedNode, setSelectedNode] = useState<SimulationNode | null>(null);
 
@@ -28,20 +31,11 @@ const App: React.FC = () => {
             <div className="flex items-center space-x-3">
               <BrandIcon className="h-8 w-8 text-cyan-400" />
               <h1 className="text-xl sm:text-2xl font-bold font-orbitron text-white tracking-wider">
-                Quantum Mind Map
+                {t('title')}
               </h1>
             </div>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <SearchIcon className="h-5 w-5 text-gray-400" />
-              </span>
-              <input
-                type="text"
-                placeholder="Search concepts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-48 sm:w-64 bg-gray-800 border border-gray-700 rounded-md py-2 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
-              />
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
