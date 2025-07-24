@@ -10,7 +10,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     backend: {
-      loadPath: '/Quantum-Computing-Mind-Map/locales/{{lng}}/{{ns}}.json',
+      loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/{{ns}}.json`,
     },
   });
 
