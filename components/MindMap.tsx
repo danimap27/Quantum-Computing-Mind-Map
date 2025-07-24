@@ -4,6 +4,7 @@ import { forceSimulation, forceManyBody, forceCenter, forceCollide, forceLink, t
 import { drag, type D3DragEvent } from 'd3-drag';
 import { zoom } from 'd3-zoom';
 import { select, selectAll } from 'd3-selection';
+import { useTranslation } from 'react-i18next';
 import type { MindMapNodeData, SimulationNode, SimulationLink } from '../types';
 
 interface MindMapProps {
@@ -36,6 +37,7 @@ const CHARGE_STRENGTH = -800;
 const LEVEL_COLORS = ['#8b5cf6', '#22d3ee', '#34d399', '#f59e0b', '#9ca3af'];
 
 const MindMap: React.FC<MindMapProps> = ({ data, onNodeClick, searchTerm }) => {
+  const { t } = useTranslation();
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const simulationRef = useRef<Simulation<SimulationNode, SimulationLink> | null>(null);
@@ -58,8 +60,8 @@ const MindMap: React.FC<MindMapProps> = ({ data, onNodeClick, searchTerm }) => {
   
   const isHighlighted = useCallback((node: SimulationNode) => {
     if (!searchTerm) return false;
-    return node.name.toLowerCase().includes(searchTerm.toLowerCase());
-  }, [searchTerm]);
+    return t(node.id).toLowerCase().includes(searchTerm.toLowerCase());
+  }, [searchTerm, t]);
 
   const createDragHandler = (simulation: Simulation<SimulationNode, SimulationLink>) => {
     function dragstarted(event: D3DragEvent<SVGGElement, SimulationNode, SimulationNode>) {
@@ -226,7 +228,7 @@ const MindMap: React.FC<MindMapProps> = ({ data, onNodeClick, searchTerm }) => {
                       strokeLinejoin: 'round',
                   }}
                 >
-                  {node.name}
+                  {t(node.id)}
                 </text>
 
                 {/* Expand/Collapse Indicator */}
